@@ -6,14 +6,20 @@ public class Esporte {
 	
 	private String descricao;
 	
+	private String local;
+	
+	private Long quantidade;
+	
 	public Esporte() {
 		
 	}
 
-	public Esporte(Long id, String descricao) {
+	public Esporte(Long id, String descricao, String local, Long quantidade) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.local = local;
+		this.quantidade = quantidade;
 	}
 
 	public Long getId() {
@@ -30,6 +36,22 @@ public class Esporte {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public Long getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	@Override

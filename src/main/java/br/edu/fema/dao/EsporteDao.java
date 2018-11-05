@@ -21,13 +21,15 @@ public class EsporteDao {
 	}
 
 	public boolean inserir(Esporte esporte) {
-		String sql = "INSERT INTO esportes (descricao) values (?);";
+		String sql = "INSERT INTO esportes (descricao, local, quantidade) values (?,?,?);";
 		boolean retorno = false;
 
 		try {
 			cnn.conectar();
 			stmt = cnn.getPreparedStatement(sql);
 			stmt.setString(1, esporte.getDescricao());
+			stmt.setString(2, esporte.getLocal());
+			stmt.setLong(3, esporte.getQuantidade());
 			stmt.executeUpdate();
 			retorno = true;
 		} catch (SQLException e) {
@@ -39,14 +41,16 @@ public class EsporteDao {
 	}
 
 	public boolean alterar(Esporte esporte, Long id) {
-		String sql = "UPDATE esportes set descricao = ? where id = ?;";
+		String sql = "UPDATE esportes set descricao = ?, local=?, quantidade=? where id = ?;";
 		boolean retorno = false;
 
 		try {
 			cnn.conectar();
 			stmt = cnn.getPreparedStatement(sql);
 			stmt.setString(1, esporte.getDescricao());
-			stmt.setLong(2, id);
+			stmt.setString(2, esporte.getLocal());
+			stmt.setLong(3, esporte.getQuantidade());
+			stmt.setLong(4, id);
 			stmt.executeUpdate();
 			retorno = true;
 		} catch (SQLException e) {
@@ -61,7 +65,8 @@ public class EsporteDao {
 	public Esporte objectFactoryInterface(ResultSet rs) {
 		Esporte esporte = null;
 		try {
-			esporte = new Esporte(rs.getLong("id"), rs.getString("descricao"));
+			esporte = new Esporte(rs.getLong("id"), rs.getString("descricao"),
+					rs.getString("local"), rs.getLong("quantidade"));
 		} catch (SQLException e) {
 			throw new ExcecaoGeral("Erro ao criar o objeto Factory");
 		}

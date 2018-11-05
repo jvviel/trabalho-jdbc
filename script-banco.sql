@@ -1,6 +1,8 @@
 create table esportes (
 id bigint(20) primary key auto_increment,
-descricao varchar(50));
+descricao varchar(50),
+local varchar(50),
+quantidade int);
 
 create table ligas(
 id bigint(20) primary key auto_increment,
